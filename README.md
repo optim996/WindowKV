@@ -5,13 +5,12 @@
 </p>
 
 
-<h2 id="news">🎉 News</h2>
-<hr>
+## 🎉 News
+
 
 - [2025.02.15] This paper is submitted to ARR February.
 
-<h2 id="introduction">💡 Introduction</h2>
-<hr>
+## 💡 Introduction
 
 With the advancements in long-context inference capabilities of large language models (LLMs), KV cache has become one of the foundational components.
 While recent studies have focused on optimizing the memory occupied by the KV cache, they overlook two critical factors: preserving semantic coherence and regarding task-specific characteristic during compression. To address these limitations, we propose a novel task-adaptive KV cache window selection method, **WindowKV**. WindowKV dynamically selects local semantic windows consisting of consecutive tokens, according to task-specific characteristics, ensuring the retained KV cache captures continuous, essential context. Furthermore, we introduce an intra-group layer KV cache indices sharing strategy to reduce computational overhead, achieving a balance between performance and efficiency. We rigorously evaluate WindowKV on the LongBench benchmark, and the results demonstrate that it maintains a performance comparable to full KV cache retention while using only 12% of the original KV cache, significantly reducing memory requirements.  Furthermore, our method also achieves state-of-the-art results in the Needle-in-a-Haystack evaluation, highlighting its effectiveness and robustness.
@@ -25,10 +24,10 @@ In summary, our contributions are as follows:
 
 
 
-<h2 id="started">🚀 Getting started</h2>
-<hr>
+## 🚀 Getting started
 
-<h3>Requirements</h3>
+### Requirements
+
 ```bash
 accelerate==0.26.0
 colorlog==6.8.2
@@ -43,8 +42,7 @@ torch==2.2.2+cu121
 transformers==4.46.0
 ```
 
-
-<h3>Installation</h3>
+### Installation
 
 ```bash
 git clone ...
@@ -54,7 +52,7 @@ pip install -r requirements.txt .
 
 You can download the weights of the task adaptive classifier at [GoogleDriver](https://drive.google.com/file/d/10nk2DW2r1Htn5Qsh3c6S_6170qpYk3H6/view?usp=sharing).
 
-<h3>Inference</h3>
+### Inference
 
 We support inference code on `LongBench`.
 
@@ -98,31 +96,32 @@ After modifying parameters, run:
 bash windowkv.sh
 ```
 
-<h3>Needle-in-a-Haystack</h3>
+### Needle-in-a-Haystack
 
 We follow PyramidKV's evaluation method, with the evaluation metric being Rouge-1 F1.
 
 
 
-<h2 id="method">✨ Method</h2>
-<hr>
-
-![方法介绍](assets\method.jpg)
+## ✨ Method
 
 
-<h2 id="longbench">📊 Performance on LongBench</h2><hr>
-
-![主实验表格](assets\table_main_result.png)
+![方法介绍](assets/method.jpg)
 
 
 
-<h2 id="niah">🐳 Results on Needle-in-a-Haystack</h2><hr>
+## 📊 Performance on LongBench
 
-![大海捞针](assets\niah.png)
+![主实验表格](assets/table_main_result.png)
 
 
 
-<h2 id="acknowledgement">💖 Acknowledgement</h2>
+## 🐳 Results on Needle-in-a-Haystack
+
+![大海捞针](assets/niah.png)
+
+
+
+## 💖 Acknowledgement
 
 We build our project based on [PyramidKV](https://github.com/Zefan-Cai/KVCache-Factory), [PyramidInfer](https://github.com/mutonix/pyramidinfer). Many thanks to them for providing open-source code!
 
