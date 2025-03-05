@@ -1,0 +1,11 @@
+accelerate==0.26.0
+colorlog==6.8.2
+flash-attn==2.6.3
+fuzzywuzzy==0.18.0
+jieba==0.42.1
+python-Levenshtein==0.26.1
+numpy==1.26.4
+rouge==1.0.1
+rouge_score==0.1.2
+torch==2.2.2+cu121
+transformers==4.46.0
