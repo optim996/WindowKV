@@ -5,15 +5,9 @@
 </p>
 
 
-## 🎉 News
-
-
-- [2025.02.15] This paper is submitted to ARR February.
-
 ## 💡 Introduction
 
-With the advancements in long-context inference capabilities of large language models (LLMs), KV cache has become one of the foundational components.
-While recent studies have focused on optimizing the memory occupied by the KV cache, they overlook two critical factors: preserving semantic coherence and regarding task-specific characteristic during compression. To address these limitations, we propose a novel task-adaptive KV cache window selection method, **WindowKV**. WindowKV dynamically selects local semantic windows consisting of consecutive tokens, according to task-specific characteristics, ensuring the retained KV cache captures continuous, essential context. Furthermore, we introduce an intra-group layer KV cache indices sharing strategy to reduce computational overhead, achieving a balance between performance and efficiency. We rigorously evaluate WindowKV on the LongBench benchmark, and the results demonstrate that it maintains a performance comparable to full KV cache retention while using only 12% of the original KV cache, significantly reducing memory requirements.  Furthermore, our method also achieves state-of-the-art results in the Needle-in-a-Haystack evaluation, highlighting its effectiveness and robustness.
+With the advancements in long-context inference capabilities of large language models (LLMs), the KV cache has become one of the foundational components. However, its substantial GPU memory consumption makes KV cache compression a key technique for enabling efficient LLM inference in industrial scenarios. While recent studies have focused on optimizing the memory occupied by the KV cache, they overlook two critical factors: preserving semantic coherence and regarding task-specific characteristic during compression. To address these limitations, we propose a novel task-adaptive KV cache window selection method, **WindowKV**. WindowKV dynamically selects local semantic windows consisting of consecutive tokens, according to task-specific characteristics, ensuring the retained KV cache captures continuous, essential context. Additionally, we introduce an intra-group layer KV cache indices sharing strategy to reduce computational overhead, achieving a balance between performance and efficiency. We rigorously evaluate WindowKV on the LongBench benchmark, and the results demonstrate that it maintains a performance comparable to full KV cache retention while using only 12% of the original KV cache, significantly reducing memory requirements. Furthermore, our method also achieves state-of-the-art results in the Needle-in-a-Haystack evaluation, highlighting its effectiveness and robustness.
 
 
 In summary, our contributions are as follows:
@@ -50,8 +44,6 @@ cd WindowKV
 pip install -r requirements.txt .
 ```
 
-You can download the weights of the task adaptive classifier at [GoogleDriver](https://drive.google.com/file/d/10nk2DW2r1Htn5Qsh3c6S_6170qpYk3H6/view?usp=sharing).
-
 ### Inference
 
 We support inference code on `LongBench`.
@@ -70,10 +62,10 @@ CUDA_VISIBLE_DEVICES="0" \
     --use_cache \
     --attn_implementation ${attn_implementation} \
     --max_capacity_prompt ${max_capacity_prompt} \
-    --review_window_size "16" \
+    --review_window_size "8" \
     --shared_layers "8" \
-    --suffix_max "16" \
-    --suffix_avg "32" \
+    --suffix_max "32" \
+    --suffix_avg "16" \
     --model_dir "/the/path/to/models_weight/Meta-Llama-3-8B-Instruct/" \
     --bert_model_dir "/the/path/to/models_weight/bert-base-cased" \
     --classifier_dir "/the/path/to/classifier_checkpoint/best_model.pth"

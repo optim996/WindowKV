@@ -186,19 +186,19 @@ def init_WindowKV(self, num_hidden_layers):
         raise ValueError(f"Unknown model_type: {self.config.window_select_strategy}.")
 
 
-
-    self.kv_cluster = WindowKVCluster(
-        num_hidden_layers = num_hidden_layers,
-        layer_idx = self.layer_idx,
-        review_window_size = args.review_window_size,
-        win_max_attn_scores = win_max_attn_scores,
-        shared_layers = args.shared_layers,
-        suffix_size = suffix_size,
-        beta = args.beta,
-        max_capacity_prompt = args.max_capacity_prompt,
-        layer_decay_strategy = args.layer_decay_strategy,
-        window_select_strategy = self.config.window_select_strategy,
-    )
+    if not hasattr(self, "kv_cluster"):
+        self.kv_cluster = WindowKVCluster(
+            num_hidden_layers = num_hidden_layers,
+            layer_idx = self.layer_idx,
+            review_window_size = args.review_window_size,
+            win_max_attn_scores = win_max_attn_scores,
+            shared_layers = args.shared_layers,
+            suffix_size = suffix_size,
+            beta = args.beta,
+            max_capacity_prompt = args.max_capacity_prompt,
+            layer_decay_strategy = args.layer_decay_strategy,
+            window_select_strategy = self.config.window_select_strategy,
+        )
 
 
 
